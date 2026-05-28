@@ -1,4 +1,4 @@
-export default function StatCard({ label, valore, piccolo = false }) {
+export default function KPICard({ label, valore, piccolo = false }) {
   return (
     <div className="kpi-card">
       <span className="kpi-label">{label}</span>

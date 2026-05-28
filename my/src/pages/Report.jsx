@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { TIPI } from "../data";
-import StatCard from "../components/StatCard";
+import StatCard from "../components/KPICard";
 
 const PALETTE = ["#3a3a3a", "#888", "#c0b9a8"];
 

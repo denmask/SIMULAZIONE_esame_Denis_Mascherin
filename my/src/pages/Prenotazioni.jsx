@@ -2,9 +2,9 @@ import { useState } from "react";
 import { calcolaOre } from "../data";
 
 const coloreTipo = {
-  "Scrivania": "tipo di scrivania",
-  "Sala riunioni": "tipo di sala",
-  "Ufficio privato": "tipo di ufficio",
+  "Scrivania": "badge-scrivania",
+  "Sala riunioni": "badge-sala",
+  "Ufficio privato": "badge-ufficio",
 };
 
 function Campo({ label, errore, children }) {

@@ -2,9 +2,9 @@ import { useState } from "react";
 import { TIPI, STATI } from "../data";
 
 const coloreTipo = {
-  "Scrivania": "tipo-scrivania",
-  "Sala riunioni": "tipo-sala",
-  "Ufficio privato": "tipo-ufficio",
+  "Scrivania": "badge-scrivania",
+  "Sala riunioni": "badge-sala",
+  "Ufficio privato": "badge-ufficio",
 };
 
 const coloreStato = {

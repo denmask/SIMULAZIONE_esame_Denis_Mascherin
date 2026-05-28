@@ -1,4 +1,4 @@
-import StatCard from "../components/StatCard";
+import StatCard from "../components/KPICard";
 import { TIPI, STATI } from "../data";
 
 export default function Dashboard({ spazi, prenotazioni, onCambiaPagina }) {
