@@ -9,8 +9,8 @@ export default function App() {
 
   const voci = [
     { id: "spazi", etichetta: "Spazi" },
-    { id: "prenotazioni", etichetta: "Prenota"},
-    { id: "report", etichetta: "Report"},
+    { id: "prenotazioni", etichetta: "Prenota" },
+    { id: "report", etichetta: "Report" },
   ];
 
   return (
@@ -32,9 +32,7 @@ export default function App() {
             </button>
           ))}
         </nav>
-        <div className="sidebar-footer">
-          <span className="versione">v1.0</span>
-        </div>
+        <div className="sidebar-footer" />
       </aside>
 
       <div className="contenuto">
@@ -42,7 +40,7 @@ export default function App() {
           <button className="toggle-sidebar" onClick={() => setSidebarAperta(s => !s)}>
             {sidebarAperta ? "←" : "→"}
           </button>
-          <h1 className="navbar-titolo">Gestione Spazio di Coworking</h1>
+          <h1 className="navbar-titolo">Il tuo spazio</h1>
           <div className="navbar-destra">
             <span className="badge-oggi">{new Date().toLocaleDateString("it-IT", { weekday: "short", day: "numeric", month: "long" })}</span>
           </div>
@@ -89,8 +87,17 @@ function PaginaSpazi({ spazi, aggiungiSpazio, aggiornaStatoSpazio }) {
     setMostraForm(false);
   }
 
-  const coloreTipo = { "Scrivania": "tipo-scrivania", "Sala riunioni": "tipo-sala", "Ufficio privato": "tipo-ufficio" };
-  const coloreStato = { "Disponibile": "ok", "Occupato": "no ok", "In manutenzione": "in corso" };
+  const coloreTipo = {
+    "Scrivania": "tipo-scrivania",
+    "Sala riunioni": "tipo-sala",
+    "Ufficio privato": "tipo-ufficio",
+  };
+
+  const coloreStato = {
+    "Disponibile": "stato-ok",
+    "Occupato": "stato-busy",
+    "In manutenzione": "stato-maint",
+  };
 
   return (
     <div>
@@ -160,16 +167,12 @@ function PaginaSpazi({ spazi, aggiungiSpazio, aggiornaStatoSpazio }) {
             </div>
             <h3 className="nome-spazio">{s.nome}</h3>
             <div className="info-spazio">
-              <span> {s.capienza} {s.capienza === 1 ? "persona" : "persone"}</span>
+              <span>{s.capienza} {s.capienza === 1 ? "persona" : "persone"}</span>
               <span>€{s.tariffa}/ora</span>
             </div>
             <div className="card-spazio-footer">
               <label className="label-cambio">Cambia stato:</label>
-              <select
-                value={s.stato}
-                onChange={e => aggiornaStatoSpazio(s.id, e.target.value)}
-                className="select-stato"
-              >
+              <select value={s.stato} onChange={e => aggiornaStatoSpazio(s.id, e.target.value)} className="select-stato">
                 {STATI.map(st => <option key={st}>{st}</option>)}
               </select>
             </div>
@@ -231,7 +234,11 @@ function PaginaPrenotazioni({ spazi, prenotazioni, aggiungiPrenotazione }) {
     setConfermata(null);
   }
 
-  const coloreTipo = { "Scrivania": "tipo-scrivania", "Sala riunioni": "tipo-sala", "Ufficio privato": "tipo-ufficio" };
+  const coloreTipo = {
+    "Scrivania": "tipo-scrivania",
+    "Sala riunioni": "tipo-sala",
+    "Ufficio privato": "tipo-ufficio",
+  };
 
   return (
     <div>
@@ -266,7 +273,7 @@ function PaginaPrenotazioni({ spazi, prenotazioni, aggiungiPrenotazione }) {
                 </div>
                 <h3 className="nome-spazio">{s.nome}</h3>
                 <div className="info-spazio">
-                  <span> {s.capienza} {s.capienza === 1 ? "persona" : "persone"}</span>
+                  <span>{s.capienza} {s.capienza === 1 ? "persona" : "persone"}</span>
                   <span>€{s.tariffa}/ora</span>
                 </div>
               </div>
@@ -289,7 +296,6 @@ function PaginaPrenotazioni({ spazi, prenotazioni, aggiungiPrenotazione }) {
             <span>€{spazioSelezionato.tariffa}/ora</span>
             <button className="link-cambio" onClick={() => setStep(1)}>Cambia</button>
           </div>
-
           <form onSubmit={conferma} className="form-prenotazione">
             <CampoForm label="Nome cliente" errore={errori.cliente}>
               <input value={form.cliente} onChange={e => setForm({ ...form, cliente: e.target.value })} placeholder="es. Mario Rossi" />
@@ -305,14 +311,12 @@ function PaginaPrenotazioni({ spazi, prenotazioni, aggiungiPrenotazione }) {
                 <input type="time" value={form.fine} onChange={e => setForm({ ...form, fine: e.target.value })} />
               </CampoForm>
             </div>
-
             {ore > 0 && (
               <div className="anteprima-costo">
                 <span className="costo-dettaglio">{ore} {ore === 1 ? "ora" : "ore"} × €{spazioSelezionato.tariffa}</span>
                 <span className="costo-totale">€{totale.toFixed(2)}</span>
               </div>
             )}
-
             <div className="form-azioni">
               <button type="button" className="btn-secondario" onClick={() => setStep(1)}>← Indietro</button>
               <button type="submit" className="btn-primario">Conferma prenotazione</button>
@@ -371,8 +375,6 @@ function PaginaReport({ prenotazioni, spazi }) {
     script.src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js";
     script.onload = () => {
       const Chart = window.Chart;
-
-      const colori = ["#3a3a3a", "#888", "#c0b9a8"];
       const palette = ["#3a3a3a", "#888", "#c0b9a8"];
 
       if (chartTortaRef.current && !chartsCreati.current.torta) {
@@ -380,11 +382,7 @@ function PaginaReport({ prenotazioni, spazi }) {
           type: "doughnut",
           data: {
             labels: TIPI,
-            datasets: [{
-              data: TIPI.map(t => conteggioTipi[t]),
-              backgroundColor: palette,
-              borderWidth: 0,
-            }]
+            datasets: [{ data: TIPI.map(t => conteggioTipi[t]), backgroundColor: palette, borderWidth: 0 }]
           },
           options: {
             responsive: true, maintainAspectRatio: false,
@@ -495,14 +493,13 @@ function PaginaReport({ prenotazioni, spazi }) {
             ))}
           </div>
           <div style={{ position: "relative", height: "200px" }}>
-            <canvas ref={chartTortaRef} role="img" aria-label="Grafico a ciambella delle tipologie di spazi prenotati"></canvas>
+            <canvas ref={chartTortaRef} role="img" aria-label="Grafico tipologie"></canvas>
           </div>
         </div>
-
         <div className="grafico-card">
           <h3 className="grafico-titolo">Tasso di occupazione medio</h3>
           <div style={{ position: "relative", height: "240px" }}>
-            <canvas ref={chartBarreRef} role="img" aria-label="Grafico a barre, tasso di occupazione per tipo"></canvas>
+            <canvas ref={chartBarreRef} role="img" aria-label="Grafico occupazione"></canvas>
           </div>
         </div>
       </div>
@@ -510,7 +507,7 @@ function PaginaReport({ prenotazioni, spazi }) {
       <div className="grafico-card grafico-largo">
         <h3 className="grafico-titolo">Andamento degli incassi</h3>
         <div style={{ position: "relative", height: "240px" }}>
-          <canvas ref={chartLineeRef} role="img" aria-label="Grafico a linee degli incassi nel tempo"></canvas>
+          <canvas ref={chartLineeRef} role="img" aria-label="Grafico incassi"></canvas>
         </div>
       </div>
 
@@ -520,13 +517,7 @@ function PaginaReport({ prenotazioni, spazi }) {
           <table className="tabella">
             <thead>
               <tr>
-                <th>Data</th>
-                <th>Cliente</th>
-                <th>Spazio</th>
-                <th>Tipo</th>
-                <th>Orario</th>
-                <th>Ore</th>
-                <th>Totale</th>
+                <th>Data</th><th>Cliente</th><th>Spazio</th><th>Tipo</th><th>Orario</th><th>Ore</th><th>Totale</th>
               </tr>
             </thead>
             <tbody>

@@ -10,7 +10,7 @@ export default function Navbar({ onToggleSidebar, sidebarAperta }) {
       <button className="toggle-sidebar" onClick={onToggleSidebar}>
         {sidebarAperta ? "←" : "→"}
       </button>
-      <h1 className="navbar-titolo">Gestione Spazio di Coworking</h1>
+      <h1 className="navbar-titolo">Gestisci il tuo spazio</h1>
       <span className="badge-oggi">{oggi}</span>
     </header>
   );

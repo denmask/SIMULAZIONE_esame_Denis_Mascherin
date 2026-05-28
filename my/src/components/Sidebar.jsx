@@ -1,7 +1,7 @@
 const voci = [
   { id: "spazi", etichetta: "Spazi" },
   { id: "prenotazioni", etichetta: "Prenota" },
-  { id: "report", etichetta: "Report"},
+  { id: "report", etichetta: "Report" },
 ];
 
 export default function Sidebar({ paginaAttiva, onCambiaPagina, sidebarAperta, onChiudiSidebar }) {
@@ -32,9 +32,7 @@ export default function Sidebar({ paginaAttiva, onCambiaPagina, sidebarAperta, o
         ))}
       </nav>
 
-      <div className="sidebar-footer">
-        <span className="versione">v1.0</span>
-      </div>
+      <div className="sidebar-footer" />
     </aside>
   );
 }
