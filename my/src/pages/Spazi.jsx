@@ -8,9 +8,9 @@ const coloreTipo = {
 };
 
 const coloreStato = {
-  "Disponibile": "ok",
-  "Occupato": "no ok",
-  "In manutenzione": "in corso",
+  "Disponibile": "stato-disponibile",
+  "Occupato": "stato-occupato",
+  "In manutenzione": "stato-manutenzione",
 };
 
 function Campo({ label, errore, children }) {
@@ -57,20 +57,20 @@ export default function Spazi({ spazi, aggiungiSpazio, aggiornaStatoSpazio }) {
   }
 
   return (
-    <div>
+    <div className="spazi-container">
       <div className="sezione-header">
         <div>
-          <h2 className="titolo-pagina">Spazi disponibili</h2>
-          <p className="sottotitolo">{spaziVisibili.length} spazi trovati</p>
+          <h2 className="titolo-pagina">Spazi</h2>
+          <p className="sottotitolo">{spaziVisibili.length} disponibili</p>
         </div>
         <button className="btn-primario" onClick={() => setMostraForm(m => !m)}>
-          {mostraForm ? "Chiudi" : "+ Nuovo spazio"}
+          {mostraForm ? "Chiudi" : "+ Nuovo"}
         </button>
       </div>
 
       {mostraForm && (
         <div className="card form-card">
-          <h3 className="card-titolo">Aggiungi uno spazio</h3>
+          <h3 className="card-titolo">Aggiungi spazio</h3>
           <form onSubmit={salva} className="griglia-form">
             <Campo label="Nome" errore={errori.nome}>
               <input
@@ -84,7 +84,7 @@ export default function Spazi({ spazi, aggiungiSpazio, aggiornaStatoSpazio }) {
                 {TIPI.map(t => <option key={t}>{t}</option>)}
               </select>
             </Campo>
-            <Campo label="Capienza (persone)" errore={errori.capienza}>
+            <Campo label="Capienza" errore={errori.capienza}>
               <input
                 type="number" min="1"
                 value={form.capienza}
@@ -92,7 +92,7 @@ export default function Spazi({ spazi, aggiungiSpazio, aggiornaStatoSpazio }) {
                 placeholder="es. 4"
               />
             </Campo>
-            <Campo label="Tariffa oraria (€)" errore={errori.tariffa}>
+            <Campo label="Tariffa €/ora" errore={errori.tariffa}>
               <input
                 type="number" min="1"
                 value={form.tariffa}
@@ -106,7 +106,7 @@ export default function Spazi({ spazi, aggiungiSpazio, aggiornaStatoSpazio }) {
               </select>
             </Campo>
             <div className="form-azioni">
-              <button type="submit" className="btn-primario">Salva spazio</button>
+              <button type="submit" className="btn-primario">Salva</button>
               <button type="button" className="btn-secondario" onClick={() => setMostraForm(false)}>Annulla</button>
             </div>
           </form>
@@ -114,7 +114,7 @@ export default function Spazi({ spazi, aggiungiSpazio, aggiornaStatoSpazio }) {
       )}
 
       <div className="filtri-barra">
-        <span className="filtri-label">Filtra per:</span>
+        <span className="filtri-label">Filtri</span>
         <div className="filtri-gruppo">
           <span className="filtri-sublabel">Tipo</span>
           {["Tutti", ...TIPI].map(t => (
@@ -150,7 +150,7 @@ export default function Spazi({ spazi, aggiungiSpazio, aggiornaStatoSpazio }) {
             </div>
             <h3 className="nome-spazio">{s.nome}</h3>
             <div className="info-spazio">
-              <span>👥 {s.capienza} {s.capienza === 1 ? "persona" : "persone"}</span>
+              <span>{s.capienza} {s.capienza === 1 ? "persona" : "persone"}</span>
               <span>€{s.tariffa}/ora</span>
             </div>
             <div className="card-spazio-footer">
@@ -168,7 +168,7 @@ export default function Spazi({ spazi, aggiungiSpazio, aggiornaStatoSpazio }) {
       </div>
 
       {spaziVisibili.length === 0 && (
-        <div className="stato-vuoto">Nessuno spazio corrisponde ai filtri selezionati.</div>
+        <div className="stato-vuoto">Nessuno spazio trovato.</div>
       )}
     </div>
   );

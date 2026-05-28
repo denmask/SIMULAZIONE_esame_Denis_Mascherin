@@ -90,7 +90,7 @@ function PaginaSpazi({ spazi, aggiungiSpazio, aggiornaStatoSpazio }) {
   }
 
   const coloreTipo = { "Scrivania": "tipo-scrivania", "Sala riunioni": "tipo-sala", "Ufficio privato": "tipo-ufficio" };
-  const coloreStato = { "Disponibile": "stato-ok", "Occupato": "stato-busy", "In manutenzione": "stato-maint" };
+  const coloreStato = { "Disponibile": "ok", "Occupato": "no ok", "In manutenzione": "in corso" };
 
   return (
     <div>
@@ -160,7 +160,7 @@ function PaginaSpazi({ spazi, aggiungiSpazio, aggiornaStatoSpazio }) {
             </div>
             <h3 className="nome-spazio">{s.nome}</h3>
             <div className="info-spazio">
-              <span>👥 {s.capienza} {s.capienza === 1 ? "persona" : "persone"}</span>
+              <span> {s.capienza} {s.capienza === 1 ? "persona" : "persone"}</span>
               <span>€{s.tariffa}/ora</span>
             </div>
             <div className="card-spazio-footer">
@@ -266,7 +266,7 @@ function PaginaPrenotazioni({ spazi, prenotazioni, aggiungiPrenotazione }) {
                 </div>
                 <h3 className="nome-spazio">{s.nome}</h3>
                 <div className="info-spazio">
-                  <span>👥 {s.capienza} {s.capienza === 1 ? "persona" : "persone"}</span>
+                  <span> {s.capienza} {s.capienza === 1 ? "persona" : "persone"}</span>
                   <span>€{s.tariffa}/ora</span>
                 </div>
               </div>
@@ -502,7 +502,7 @@ function PaginaReport({ prenotazioni, spazi }) {
         <div className="grafico-card">
           <h3 className="grafico-titolo">Tasso di occupazione medio</h3>
           <div style={{ position: "relative", height: "240px" }}>
-            <canvas ref={chartBarreRef} role="img" aria-label="Grafico a barre del tasso di occupazione per tipologia"></canvas>
+            <canvas ref={chartBarreRef} role="img" aria-label="Grafico a barre, tasso di occupazione per tipo"></canvas>
           </div>
         </div>
       </div>

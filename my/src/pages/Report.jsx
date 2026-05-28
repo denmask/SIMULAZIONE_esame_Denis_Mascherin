@@ -155,14 +155,14 @@ export default function Report({ prenotazioni, spazi }) {
             ))}
           </div>
           <div style={{ position: "relative", height: "200px" }}>
-            <canvas ref={refTorta} role="img" aria-label="Grafico a ciambella delle tipologie di spazi prenotati" />
+            <canvas ref={refTorta} role="img" aria-label="Grafico a torta, tipi di spazi prenotati" />
           </div>
         </div>
 
         <div className="grafico-card">
           <h3 className="grafico-titolo">Tasso di occupazione</h3>
           <div style={{ position: "relative", height: "240px" }}>
-            <canvas ref={refBarre} role="img" aria-label="Grafico a barre del tasso di occupazione per tipologia" />
+            <canvas ref={refBarre} role="img" aria-label="Grafico a barre del tasso di occupazione" />
           </div>
         </div>
       </div>

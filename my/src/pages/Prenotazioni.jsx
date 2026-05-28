@@ -2,9 +2,9 @@ import { useState } from "react";
 import { calcolaOre } from "../data";
 
 const coloreTipo = {
-  "Scrivania": "tipo-scrivania",
-  "Sala riunioni": "tipo-sala",
-  "Ufficio privato": "tipo-ufficio",
+  "Scrivania": "tipo di scrivania",
+  "Sala riunioni": "tipo di sala",
+  "Ufficio privato": "tipo di ufficio",
 };
 
 function Campo({ label, errore, children }) {
@@ -21,7 +21,7 @@ export default function Prenotazioni({ spazi, aggiungiPrenotazione }) {
   const spaziDisponibili = spazi.filter(s => s.stato === "Disponibile");
   const [step, setStep] = useState(1);
   const [spazioScelto, setSpazioScelto] = useState(null);
-  const [form, setForm] = useState({ cliente: "", data: "", inizio: "09:00", fine: "17:00" });
+  const [form, setForm] = useState({ cliente: "", data: "", inizio: "08:00", fine: "17:00" });
   const [errori, setErrori] = useState({});
   const [confermata, setConfermata] = useState(null);
 
@@ -32,7 +32,7 @@ export default function Prenotazioni({ spazi, aggiungiPrenotazione }) {
     const e = {};
     if (!form.cliente.trim()) e.cliente = "Inserisci il nome del cliente";
     if (!form.data) e.data = "Seleziona una data";
-    if (ore <= 0) e.orario = "L'orario di fine deve essere dopo l'inizio";
+    if (ore <= 0) e.orario = "L'orario di fine deve essere dopo l'orario d'inizio";
     return e;
   }
 
@@ -97,7 +97,7 @@ export default function Prenotazioni({ spazi, aggiungiPrenotazione }) {
                 </div>
                 <h3 className="nome-spazio">{s.nome}</h3>
                 <div className="info-spazio">
-                  <span>👥 {s.capienza} {s.capienza === 1 ? "persona" : "persone"}</span>
+                  <span> {s.capienza} {s.capienza === 1 ? "persona" : "persone"}</span>
                   <span>€{s.tariffa}/ora</span>
                 </div>
               </div>
