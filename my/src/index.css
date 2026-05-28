@@ -3,19 +3,19 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --sabbia: #f5f2ec;
-  --sabbia-scura: #ede9e0;
+  --sabbia: #f8f1e2;
+  --sabbia-scura: #d1a30d;
   --inchiostro: #1e1c19;
   --inchiostro-leggero: #5a5751;
   --grafite: #3a3a3a;
   --corda: #c0b9a8;
   --corda-chiara: #e8e4db;
   --accent: #2e2b28;
-  --verde: #3d5a3e;
+  --verde: #55cc59;
   --verde-bg: #edf2ed;
   --arancio: #7a4a1e;
   --arancio-bg: #f7ede0;
-  --rosso: #7a2525;
+  --rosso: #eb3838;
   --rosso-bg: #f5e5e5;
   --sidebar-w: 220px;
   --navbar-h: 60px;

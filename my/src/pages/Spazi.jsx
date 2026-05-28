@@ -9,8 +9,8 @@ const coloreTipo = {
 
 const coloreStato = {
   "Disponibile": "ok",
-  "Occupato": "busy",
-  "In manutenzione": "maint",
+  "Occupato": "no ok",
+  "In manutenzione": "in corso",
 };
 
 function Campo({ label, errore, children }) {
